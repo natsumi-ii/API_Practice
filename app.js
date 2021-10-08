@@ -94,3 +94,10 @@ app.get("/api/v1/columns/1", (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
+
+app.get("/api/photo/:photoId", function(req, res, next){
+  let photo;
+  ;
+
+  res.json(photo);
+});
