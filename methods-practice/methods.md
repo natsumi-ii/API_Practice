@@ -10,6 +10,7 @@ array
 - findIndex
 - some
 - every
+- split
 - flat
 - indexOf
 - sort
