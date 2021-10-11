@@ -1,3 +1,4 @@
+const { json } = require("express");
 const express = require("express");
 const fs = require("fs");
 const app = express();
@@ -84,8 +85,6 @@ app.get("/api/v1/columns/1", (req, res) => {
   }
 });
 
-// TODO: cardsの中から、indexを指定して、合致するcardを返せるように変形する
-// ここにかく
 app.get("/users/cards/:index", function (req, res) {
   const index = req.params.index;
   const jsonString = JSON.parse(fs.readFileSync("./db.json"));
@@ -93,26 +92,23 @@ app.get("/users/cards/:index", function (req, res) {
   const users = ["first", "second", "third"];
   res.send(cards[parseInt(index)]);
 });
-// TODO: cardsOrder の中から、keyを指定して、合致するcardOrderのvalueを返せるように変形する
-// ここにかく
 
-app.get("/users/cardsOrder", function (req, res) {
-  // const key = req.params.key;
+app.get("/users/cardsOrder/:key", function (req, res) {
+  const key = req.params.key;
+  const a = `\"${key}\"`
   const jsonString = JSON.parse(fs.readFileSync("./db.json"));
+  // const jsonString = fs.readFileSync("./db.json");
   const cardsOrder = jsonString.cardsOrder;
+  // const key = Object.keys(cardsOrder);
+const type = typeof(cardsOrder)
+const test = cardsOrder[key]
+console.log('a is',a)
+console.log('key is', key)
 
-  res.send(cardsOrder[0]);
+  res.send(test);
 });
 
-
-
-
-
-
-
-
-
-
-
-
+app.listen(port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
+});
 
