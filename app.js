@@ -136,6 +136,11 @@ app.post('/cards', function (req, res) {
   res.send('POST request to the homepage')
 })
 
+// TODO: cardsのidを指定して、消せるように。データの送信などはpostと同じ。db.jsonの書き換えも込み
+app.delete('/cards/:id', function (req, res) {
+  res.send('DELETE request to homepage')
+})
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
