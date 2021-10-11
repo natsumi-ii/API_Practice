@@ -108,6 +108,19 @@ console.log('key is', key)
   res.send(test);
 });
 
+// TODO: postを実装する
+// 参考: https://e-words.jp/w/POST%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89.html
+// POST method route
+app.post('/users', function (req, res) {
+  console.log('users post')
+  // const {name, id} = req
+  console.log('body is', req.body);
+
+  // TODO:
+  // これをもとにデータをcurlでpostできるように https://qiita.com/sensuikan1973/items/b2085a9cdc6d1e97e8f8
+  res.send('POST request to the homepage')
+})
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
