@@ -1,8 +1,18 @@
 const { json } = require("express");
 const express = require("express");
 const fs = require("fs");
-const app = express();
 const port = 3000;
+
+const bodyParser = require('body-parser');
+const router = express.Router();
+const app = express();
+
+//Here we are configuring express to use body-parser as middle-ware.
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use('/', router);
+
 
 app.get("/", (req, res) => {
   res.send("Hello Worldddddddddddddddddd!");
@@ -111,13 +121,18 @@ console.log('key is', key)
 // TODO: postを実装する
 // 参考: https://e-words.jp/w/POST%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89.html
 // POST method route
-app.post('/users', function (req, res) {
-  console.log('users post')
+// 打ち方 curl -X POST -H "Content-Type: application/json" -d '{"test":"test"}' http://localhost:3000/users
+app.post('/cards', function (req, res) {
+  console.log('cards post')
   // const {name, id} = req
   console.log('body is', req.body);
-
   // TODO:
-  // これをもとにデータをcurlでpostできるように https://qiita.com/sensuikan1973/items/b2085a9cdc6d1e97e8f8
+  // Cardクラスのインスタンスを宣言して、console.logに出力
+  // Cardクラスは新しく作る
+  // Cardクラスのconstructorの実装だけでok
+  // 持つpropertyとしては、idとtext
+
+  // Nice to Have: db.jsonのcardsに作成したcardインスタンスを挿入できるように→db.jsonを書き換えるということ
   res.send('POST request to the homepage')
 })
 
