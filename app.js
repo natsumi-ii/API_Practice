@@ -115,21 +115,25 @@ app.get('/users/cardsOrder/:key', function (req, res) {
 // POST method route
 // 打ち方 curl -X POST -H "Content-Type: application/json" -d '{"text":"text"}' http://localhost:3000/cards
 //{"id":"1","text":"text"}
+
+
+class Card {
+  constructor(text) {
+    this.id = Math.random().toString();
+    this.text = text;
+  }
+}
+
 app.post('/cards', function (req, res) {
   console.log('cards post');
   console.log('body is', req.body);
+  let a = new Card(req.body.text);
+
   // TODO:
   // Cardクラスのインスタンスを宣言して、console.logに出力
   // Cardクラスは新しく作る
   // Cardクラスのconstructorの実装だけでok
   // 持つpropertyとしては、idとtext
-  class Card {
-    constructor(text) {
-      this.id = Math.random().toString();
-      this.text = text;
-    }
-  }
-  let a = new Card(req.body.text);
   // const jsonString = JSON.parse(fs.readFileSync('./db.json'));
   // TODO: fs.writeFileSyncを使ってファイルに書き直す
 
