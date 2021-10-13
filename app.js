@@ -121,7 +121,8 @@ console.log('key is', key)
 // TODO: postを実装する
 // 参考: https://e-words.jp/w/POST%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89.html
 // POST method route
-// 打ち方 curl -X POST -H "Content-Type: application/json" -d '{"test":"test"}' http://localhost:3000/users
+// 打ち方 curl -X POST -H "Content-Type: application/json" -d '{"id":"1","text":"text"}' http://localhost:3000/cards
+//{"id":"1","text":"text"}
 app.post('/cards', function (req, res) {
   console.log('cards post')
   // const {name, id} = req
@@ -131,6 +132,16 @@ app.post('/cards', function (req, res) {
   // Cardクラスは新しく作る
   // Cardクラスのconstructorの実装だけでok
   // 持つpropertyとしては、idとtext
+  class Card {
+    constructor(id, text) {
+      this.id = id
+      this.text = text
+    }
+  }
+  let a = new Card(req.body.id, req.body.text)
+  console.log(a)
+  //  console.log(req.body.text)
+  //  console.log(req.body.id)
 
   // Nice to Have: db.jsonのcardsに作成したcardインスタンスを挿入できるように→db.jsonを書き換えるということ
   res.send('POST request to the homepage')
