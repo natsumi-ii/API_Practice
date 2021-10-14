@@ -44,7 +44,6 @@ app.get("/api/v1/search", (req, res) => {
 });
 
 app.get("/api/v1/columns/count", (req, res) => {
-  // columnsの個数を返す
   try {
     const jsonString = JSON.parse(fs.readFileSync("./db.json"));
     const columns = jsonString.columns;
@@ -58,7 +57,6 @@ app.get("/api/v1/columns/count", (req, res) => {
 });
 
 app.get("/api/v1/cards/text/count", (req, res) => {
-  // cardsのテキストの長さを返す
   try {
     const jsonString = JSON.parse(fs.readFileSync("./db.json"));
     const cards = jsonString.cards;
@@ -79,9 +77,7 @@ app.get("/users/:userId/books/:bookId", function (req, res) {
   res.send(users[parseInt(userId)]);
 });
 
-// TODO: columnsの中から、indexを指定して、合致するcolumnを返せるように変形する
 app.get("/api/v1/columns/1", (req, res) => {
-  // columnsの1番目を返す
   try {
     const jsonString = JSON.parse(fs.readFileSync("./db.json"));
     const columns = jsonString.columns;
@@ -117,11 +113,9 @@ app.get("/users/cardsOrder/:key", function (req, res) {
   res.send(test);
 });
 
-// TODO: postを実装する
 // 参考: https://e-words.jp/w/POST%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89.html
 // POST method route
 // 打ち方 curl -X POST -H "Content-Type: application/json" -d '{"id":"1","text":"text"}' http://localhost:3000/cards
-//{"id":"1","text":"text"}
 class Card {
   constructor(id, text) {
     this.id = id;
@@ -137,38 +131,20 @@ app.post("/cards", function (req, res) {
   const a = new Card(req.body.id, req.body.text);
   const newData = cards.push(a);
   const b = JSON.stringify(jsonString);
-
-  // TODO:
-  // Cardクラスのインスタンスを宣言して、console.logに出力
-  // Cardクラスは新しく作る
-  // Cardクラスのconstructorの実装だけでok
-  // 持つpropertyとしては、idとtext
   console.log("jsonString is", jsonString);
-  console.log("jsonStringType is", typeof jsonString);
-  console.log("cards is", cards);
-  console.log("cardsType is", typeof cards);
-
-  console.log("newData is", newData);
-
-  // const data = "add";
 
   fs.writeFileSync("./db.json", b);
   res.send("書き込みしました");
 });
 
-// TODO: cardsのidを指定して、消せるように。データの送信などはpostと同じ。db.jsonの書き換えも込み
 //打ち方 curl -X DELETE -H "Content-Type: application/json"  http://localhost:3000/cards/7lR4Vd3EYixP
 app.delete("/cards/:id", function (req, res) {
   const id = req.params.id;
   let jsonString = JSON.parse(fs.readFileSync("./db.json"));
-  // let cards = jsonString.cards;
   jsonString.cards = jsonString.cards.filter((c) => !(c.id === id));
-  // jsonString.cards = b
   const b = JSON.stringify(jsonString);
-
-  // console.log("b is", b);
-  // console.log("cards is", cards);
   console.log("jsonString is", jsonString);
+
   fs.writeFileSync("./db.json", b);
   res.send("書き込みしました");
 
