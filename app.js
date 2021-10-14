@@ -102,19 +102,22 @@ app.get("/users/cardsOrder/:key", function (req, res) {
   const key = req.params.key;
   const a = `\"${key}\"`;
   const jsonString = JSON.parse(fs.readFileSync("./db.json"));
-  // const jsonString = fs.readFileSync("./db.json");
   const cardsOrder = jsonString.cardsOrder;
-  // const key = Object.keys(cardsOrder);
   const type = typeof cardsOrder;
   const test = cardsOrder[key];
   console.log("a is", a);
   console.log("key is", key);
+
+  const jsonString = JSON.parse(fs.readFileSync("./db.json"));
+  const cardsOrder = jsonString.cardsOrder;
+  const test = cardsOrder[key];
 
   res.send(test);
 });
 
 // 参考: https://e-words.jp/w/POST%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89.html
 // POST method route
+
 // 打ち方 curl -X POST -H "Content-Type: application/json" -d '{"id":"1","text":"text"}' http://localhost:3000/cards
 class Card {
   constructor(id, text) {
@@ -149,8 +152,8 @@ app.delete("/cards/:id", function (req, res) {
   res.send("書き込みしました");
 
   res.send("DELETE request to homepage");
-});
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  app.listen(port, () => {
+    console.log(`Example app listening at http://localhost:${port}`);
+  });
 });
